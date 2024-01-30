@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>home</title>
+  </head>
+  <body>
+    <form enctype="multipart/form-data" id="form">
+      <input type="file" id="file" name="image" accept=".jpg" />
+      <button type="submit">Submit</button>
+    </form>
+
+    <script>
+      document.getElementById("form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const userFile = document.getElementById("file").files[0];
+        const formData = new FormData();
+        formData.append("image", userFile, "image.jpg");
+        async function upload(formData) {
+          try {
+            const response = await fetch("/upload", {
+              method: "POST",
+              body: formData,
+            });
+            const result = response.json();
+            console.log("Success:", result);
+            if (response.ok) {
+              setTimeout(() => {
+                window.location.href = "/crop_image";
+              }, 1000);
+            }
+          } catch (error) {
+            console.log("Error:", error);
+          }
+        }
+        upload(formData);
+      });
+    </script>
+  </body>
+</html>

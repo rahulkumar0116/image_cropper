@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="/node_modules/cropperjs/dist/cropper.min.css"
+    />
+    <link rel="stylesheet" href="/src/frontend/crop_image/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <img src="/public/temp/image.jpg" id="input" />
+        <button id="crop-btn">Crop Image</button>
+      </div>
+      <div>
+        <img src="" id="output" alt="croppedImage" />
+      <button id="DownloadButton">Download</button>
+      </div>
+    </div>
+    <script src="/node_modules/cropperjs//dist/cropper.min.js"></script>
+    <script>
+      let image = document.getElementById("input");
+      let cropper = new Cropper(image, {
+        aspectRatio: 0,
+        viewMode: 0,
+      });
+      document.getElementById("crop-btn").addEventListener("click", () => {
+        let croppedImage = cropper
+          .getCroppedCanvas()
+          .toDataURL("image/png, Image/jpeg");
+        document.getElementById("output").src = croppedImage;
+        console.log(croppedImage)
+      });
+      function downloadfile(){
+        const imageUrl = document.getElementById("output").src
+        if(!imageUrl){
+          console.error("plz crop Image first")
+        }
+        const fileName = "image.jpg"
+        const link = document.createElement("a")
+        link.href = imageUrl
+        link.download = fileName
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link);
+        window.location.href = "/home"
+      }
+      const button = document.getElementById("DownloadButton")
+      button.addEventListener("click", downloadfile);
+    </script>
+  </body>
+</html>

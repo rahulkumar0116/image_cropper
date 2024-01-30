@@ -1,0 +1,11 @@
+img{
+    display: block;
+    width: 500px;
+    height: 600px;
+    max-width: 100%;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
