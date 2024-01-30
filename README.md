@@ -19,3 +19,5 @@ Once the user is satisfied with the crop, they trigger the download process.
 The cropped image is downloaded to the user's local system.
 Optionally, the user can navigate to other pages within the application, such as a home page or gallery page.
 ![Alt text](image.png)
+![Alt text](image-1.png)
+![Alt text](image-2.png)
